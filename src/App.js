@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { StyleSheet, css } from 'aphrodite';
 import StockPlayer from './components/StockLog';
 import './App.css';
@@ -82,7 +81,6 @@ class App extends Component {
   };
 
   render() {
-    const { stockHistory } = this.state;
     return (
       <div>
         <div className={css(styles.container)}>

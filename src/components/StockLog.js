@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { StyleSheet, css } from 'aphrodite';
 import { toggleLogPlayer } from '../actions/stocks';
 
@@ -36,7 +37,12 @@ const Stocks = props =>
 const StockLog = props => {
   return props.entryTimes.map((entryTime, index) => (
     <div>
-      <div>Updates for {entryTime}</div>
+      <div>
+        Updates for{' '}
+        {moment(entryTime)
+          .utc()
+          .format()}
+      </div>
       <Stocks stocks={props.stocks[index]} />
       <br />
     </div>
@@ -44,14 +50,12 @@ const StockLog = props => {
 };
 
 class StockPlayer extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    return nextProps.isLogPlaying;
-  }
   render() {
+    const { isLogPlaying } = this.props;
     return (
       <div>
         <button onClick={this.props.toggleLogPlayer}>
-          <h2>{this.props.isLogPlaying ? 'Pause' : 'Play'} Log</h2>
+          <h2>{isLogPlaying ? 'Pause' : 'Play'} Log</h2>
         </button>
         <h1>Log</h1>
         <div className={css(styles.scrollableContainer)}>
